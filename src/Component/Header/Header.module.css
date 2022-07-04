@@ -1,0 +1,34 @@
+.header {
+  margin: 1rem 10%;
+
+  display: flex;
+  gap: 25rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header p {
+  padding-right: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.header ul {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  list-style: none;
+}
+
+.header li {
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.header a {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: black;
+  display: inline-block;
+  text-decoration: none;
+}
