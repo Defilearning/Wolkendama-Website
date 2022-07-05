@@ -1,8 +1,9 @@
 .header {
-  margin: 1rem 10%;
+  padding-top: 10vh;
+
+  margin: 0 15%;
 
   display: flex;
-  gap: 25rem;
   align-items: center;
   justify-content: space-between;
 }
@@ -11,6 +12,7 @@
   padding-right: 1rem;
   font-size: 1.5rem;
   font-weight: 700;
+  color: #cfcce3;
 }
 
 .header ul {
@@ -27,8 +29,8 @@
 
 .header a {
   font-size: 1.5rem;
-  font-weight: 700;
-  color: black;
+  font-weight: 400;
+  color: #cfcce3;
   display: inline-block;
   text-decoration: none;
 }
