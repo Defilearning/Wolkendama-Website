@@ -1,16 +1,22 @@
-import Header from "./Component/Header/Header";
-import Hero from "./Component/Hero/Hero";
+import { Routes, Route } from "react-router-dom";
 
-import classes from "./App.module.css";
+import Home from "./Pages/Home";
+import Shop from "./Pages/Shop";
+import Blog from "./Pages/Blog";
+import Culture from "./Pages/Culture";
+import Tutorial from "./Pages/Tutorial";
+import AboutUs from "./Pages/AboutUs";
 
 function App() {
   return (
-    <div className={classes.background}>
-      <div className={classes.parallex}>
-        <Header />
-        <Hero />
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/shop" element={<Shop />} />
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/culture" element={<Culture />} />
+      <Route path="/tutorial" element={<Tutorial />} />
+      <Route path="/about-us" element={<AboutUs />} />
+    </Routes>
   );
 }
 

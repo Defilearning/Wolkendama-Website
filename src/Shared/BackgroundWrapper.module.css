@@ -1,0 +1,9 @@
+.background {
+  min-width: 100vw;
+  background: url("../image/Test2_00190.png") repeat fixed;
+  background-size: cover;
+}
+
+.parallex {
+  height: 200vh;
+}

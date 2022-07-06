@@ -1,20 +1,3 @@
-.heroContainer {
-  margin: 5rem 15%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15rem;
-}
-
-.heroContainer h1 {
-  min-width: 30rem;
-}
-
-.heroContainer img {
-  display: inline-block;
-  max-height: 40rem;
-}
-
 .contentContainer {
   display: flex;
   flex-direction: column;
@@ -78,39 +61,4 @@
 
 .borderButton svg {
   width: 2rem;
-}
-
-.photoContainer {
-  position: relative;
-}
-
-.photoContainer img {
-  transform: rotate(5deg);
-  z-index: 2;
-}
-
-.photoContainer::after {
-  position: absolute;
-  transform: rotate(5deg);
-  content: "";
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(214, 96, 0, 0.329) 0%,
-    rgba(92, 0, 64, 0.65) 100%
-  );
-  z-index: 3;
-}
-
-.blurBackground {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  transform: scale(0.9);
-  background-image: linear-gradient(#ee76527e, #23a5d569);
-  filter: blur(100px);
-  z-index: 0;
 }

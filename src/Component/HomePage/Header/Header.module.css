@@ -12,7 +12,7 @@
   padding-right: 1rem;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #cfcce3;
+  /* color: #cfcce3; */
 }
 
 .header ul {
@@ -27,7 +27,7 @@
   border-radius: 4px;
 }
 
-.header a {
+.link {
   font-size: 1.5rem;
   font-weight: 400;
   color: #cfcce3;
