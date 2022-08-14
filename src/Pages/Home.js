@@ -1,4 +1,3 @@
-import BackgroundWrapper from "../Shared/BackgroundWrapper";
 import Header from "../Component/HomePage/Header/Header";
 import Hero from "../Component/HomePage/Hero/Hero";
 import Catalogue from "../Component/HomePage/Catalogue/Catalogue";
@@ -7,13 +6,13 @@ import Footer from "../Shared/Footer";
 
 const Home = () => {
   return (
-    <BackgroundWrapper>
+    <div className="px-24 bg-purple-theme h-screen w-screen">
       <Header />
       <Hero />
-      <Catalogue />
+      {/* <Catalogue />
       <HomeBlog />
-      <Footer />
-    </BackgroundWrapper>
+      <Footer /> */}
+    </div>
   );
 };
 

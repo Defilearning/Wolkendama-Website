@@ -1,36 +1,24 @@
 import { Link } from "react-router-dom";
 
-import classes from "./Header.module.css";
-
 const Header = () => {
   return (
-    <div className={classes.header}>
-      <p>LOGO</p>
-      <ul>
+    <div className="flex pt-16 justify-between text-2xl">
+      <p className="text-light-gray text-opacity-80">LOGO</p>
+      <ul className="flex gap-10 text-light-gray text-opacity-80 font-medium text">
         <li>
-          <Link to="/shop" className={classes.link}>
-            Shop
-          </Link>
+          <Link to="/shop">Shop</Link>
         </li>
         <li>
-          <Link to="/blog" className={classes.link}>
-            Blog
-          </Link>
+          <Link to="/blog">Blog</Link>
         </li>
         <li>
-          <Link to="/culture" className={classes.link}>
-            Culture
-          </Link>
+          <Link to="/culture">Culture</Link>
         </li>
         <li>
-          <Link to="/tutorial" className={classes.link}>
-            Tutorial
-          </Link>
+          <Link to="/tutorial">Tutorial</Link>
         </li>
         <li>
-          <Link to="/about-us" className={classes.link}>
-            About us
-          </Link>
+          <Link to="/about-us">About us</Link>
         </li>
       </ul>
     </div>

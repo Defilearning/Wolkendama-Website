@@ -1,16 +1,14 @@
 import { Link } from "react-router-dom";
 
-import classes from "./HeroContent.module.css";
-
 const HeroContent = () => {
   return (
-    <div className={classes.contentContainer}>
-      <h1>
+    <div>
+      <h1 className=" text-8xl">
         With <span>WOLKendama</span> where Liberty finds its <span>value</span>
       </h1>
       <p>We provide performance, products and courses for everyone.</p>
-      <div className={classes.buttonContainer}>
-        <Link to="blog" className={classes.borderButton}>
+      <div>
+        <Link to="blog">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6"
@@ -27,7 +25,7 @@ const HeroContent = () => {
           </svg>
           <span>Blog</span>
         </Link>
-        <Link to="shop" className={classes.colorButton}>
+        <Link to="shop">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6"

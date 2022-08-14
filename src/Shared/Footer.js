@@ -1,8 +1,8 @@
-import BlankWrapper from "./BlankWrapper";
+import { Fragment } from "react";
 
 const Footer = () => {
   return (
-    <BlankWrapper>
+    <Fragment>
       <div>
         <h1>Contact Us</h1>
         <p>Name : Yuet Jin Jie</p>
@@ -11,7 +11,7 @@ const Footer = () => {
       <div>
         <p>other website Link</p>
       </div>
-    </BlankWrapper>
+    </Fragment>
   );
 };
 
