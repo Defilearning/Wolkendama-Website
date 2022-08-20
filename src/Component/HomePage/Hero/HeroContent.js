@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const HeroContent = () => {
   return (
     <div>
-      <h1 className=" text-8xl">
+      <h1 className=" text-7xl">
         With <span>WOLKendama</span> where Liberty finds its <span>value</span>
       </h1>
       <p>We provide performance, products and courses for everyone.</p>
