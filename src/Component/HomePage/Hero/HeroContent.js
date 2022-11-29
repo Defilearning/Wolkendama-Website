@@ -13,7 +13,7 @@ const HeroContent = () => {
       </p>
       <div className="flex">
         <Link to="blog">
-          <Button variant="gradient" className="mr-20">
+          <Button variant="gradient" textSize="lg" className="mr-20">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="33"
@@ -33,7 +33,7 @@ const HeroContent = () => {
           </Button>
         </Link>
         <Link to="shop">
-          <Button variant="white">
+          <Button variant="white" textSize="lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="33"

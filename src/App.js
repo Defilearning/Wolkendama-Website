@@ -45,13 +45,21 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
 
   const addToCart = (item) => {
-    const foundItem = cartItems.find((el) => el.variant === item.variant);
-    const foundItemIndex = cartItems.findIndex(
-      (el) => el.variant === item.variant
+    const foundItem = cartItems.find(
+      (el) => el.variant === item.variant && el.id === item.id
     );
 
+    // If there is no items in cart, add item to Cart
+    if (!foundItem) {
+      setCartItems((prev) => [...prev, item]);
+      return {
+        status: "success",
+        message: "Item has been added to your cart!",
+      };
+    }
+
     // If there is no variant
-    if (!item?.variant) {
+    else if (!item?.variant) {
       return {
         status: "warning",
         message: "Please select variant of the item.",
@@ -74,17 +82,12 @@ function App() {
       item.quantity <=
       foundItem?.remainingQuantity - foundItem?.quantity
     ) {
-      if (foundItemIndex === -1) {
-        return;
-      }
-
       const tempItem = {
         ...foundItem,
         quantity: foundItem.quantity + item.quantity,
       };
 
       setCartItems((prev) => {
-        console.log(tempItem);
         const tempArr = prev.filter((el) => el !== foundItem);
         if (prev.length === 0) {
           return [tempItem];
@@ -97,15 +100,12 @@ function App() {
         message: "Item has been added to your cart!",
       };
     }
+  };
 
-    // Push the item into array
-    else {
-      setCartItems((prev) => [...prev, item]);
-      return {
-        status: "success",
-        message: "Item has been added to your cart!",
-      };
-    }
+  const addCartQuantity = (item) => {
+    const foundItem = cartItems.find(
+      (el) => el.variant === item.variant && el.id === item.id
+    );
   };
 
   return (

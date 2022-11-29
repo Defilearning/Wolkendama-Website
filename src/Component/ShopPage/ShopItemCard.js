@@ -31,10 +31,10 @@ const ShopItemCard = ({
           })}
         </div>
         <div className=" flex justify-between ">
-          <Button variant="secondary" textSize="md">
+          <Button variant="secondary" textSize="base">
             <Link to={`/shop/${id}`}>Details</Link>
           </Button>
-          <Button variant="gradient" textSize="md">
+          <Button variant="gradient" textSize="base">
             Add to cart
           </Button>
         </div>

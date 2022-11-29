@@ -28,12 +28,12 @@ const DUMMY_DATA = {
   tag: ["single", "hot"],
   specification: ["plain", "red", "sticky"],
   variant: {
-    red: 8,
-    purple: 0,
-    blue: 2,
-    green: 3,
-    orange: 0,
-    pink: 5,
+    red: { remainingQuantity: 8, price: 50 },
+    purple: { remainingQuantity: 0, price: 50 },
+    blue: { remainingQuantity: 2, price: 50 },
+    green: { remainingQuantity: 3, price: 50 },
+    orange: { remainingQuantity: 0, price: 50 },
+    pink: { remainingQuantity: 5, price: 75 },
   },
 };
 

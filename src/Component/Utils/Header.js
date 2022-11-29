@@ -68,7 +68,11 @@ const Header = ({ className }) => {
           </li>
           <li>
             <Link to="/cart">
-              <Button variant="gradient" className="text-xl">
+              <Button
+                variant="gradient"
+                textSize="lg"
+                className="flex items-center"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"

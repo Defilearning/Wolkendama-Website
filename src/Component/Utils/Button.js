@@ -9,8 +9,8 @@ const variantMap = {
 
 const textSizeMap = {
   lg: "text-2xl py-3 px-6",
-  base: "text-base py-2 px-4",
-  md: "text-lg py-2 px-4",
+  base: "text-lg py-2 px-4",
+  md: "text-base py-1 px-3",
   sm: "text-sm py-1 px-2",
 };
 
