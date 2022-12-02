@@ -11,8 +11,7 @@ const DUMMY_DATA = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
     rank: "top-2",
     imgCover: "https://picsum.photos/300/400",
-    type: "kendama",
-    tag: ["single", "hot"],
+    itemFilter: ["single", "hot"],
     specification: ["plain", "red", "sticky"],
   },
   {
@@ -22,8 +21,7 @@ const DUMMY_DATA = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
     rank: "top-1",
     imgCover: "https://picsum.photos/300/400",
-    type: "kendama",
-    tag: ["gradient", "hot"],
+    itemFilter: ["gradient", "hot"],
     specification: ["gradient", "red", "blue", "sticky"],
   },
   {
@@ -33,8 +31,7 @@ const DUMMY_DATA = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
     rank: "top-3",
     imgCover: "https://picsum.photos/300/400",
-    type: "accessories",
-    tag: ["accessories"],
+    itemFilter: ["accessories"],
     specification: ["plain", "red"],
   },
   {
@@ -44,8 +41,7 @@ const DUMMY_DATA = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
     rank: "top-3",
     imgCover: "https://picsum.photos/300/400",
-    type: "accessories",
-    tag: ["accessories"],
+    itemFilter: ["accessories"],
     specification: ["plain", "red"],
   },
   {
@@ -55,8 +51,7 @@ const DUMMY_DATA = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
     rank: "top-3",
     imgCover: "https://picsum.photos/300/400",
-    type: "kendama",
-    tag: ["single"],
+    itemFilter: ["single"],
     specification: ["plain", "red"],
   },
   {
@@ -66,8 +61,7 @@ const DUMMY_DATA = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
     rank: "top-3",
     imgCover: "https://picsum.photos/300/400",
-    type: "kendama",
-    tag: ["gradient"],
+    itemFilter: ["gradient"],
     specification: ["gradient", "red", "green"],
   },
   {
@@ -77,8 +71,7 @@ const DUMMY_DATA = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
     rank: "top-3",
     imgCover: "https://picsum.photos/300/400",
-    type: "kendama",
-    tag: ["single"],
+    itemFilter: ["single"],
     specification: ["plain", "red"],
   },
   {
@@ -88,8 +81,7 @@ const DUMMY_DATA = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
     rank: "top-3",
     imgCover: "https://picsum.photos/300/400",
-    type: "kendama",
-    tag: ["single"],
+    itemFilter: ["single"],
     specification: ["plain", "red"],
   },
 ];
@@ -134,8 +126,8 @@ const Shop = () => {
       let tempArr = [];
 
       for (let i = 0; i < DUMMY_DATA.length; i++) {
-        for (let j = 0; j < DUMMY_DATA[i].tag.length; j++) {
-          if (DUMMY_DATA[i].tag[j] === filter) {
+        for (let j = 0; j < DUMMY_DATA[i].itemFilter.length; j++) {
+          if (DUMMY_DATA[i].itemFilter[j] === filter) {
             tempArr.push(DUMMY_DATA[i]);
           }
         }
@@ -181,7 +173,6 @@ const Shop = () => {
                     descriptions={el.descriptions}
                     rank={el.rank}
                     imgCover={el.imgCover}
-                    type={el.type}
                     specification={el.specification}
                     id={el.id}
                     key={el.id}
@@ -198,7 +189,6 @@ const Shop = () => {
                     descriptions={el.descriptions}
                     rank={el.rank}
                     imgCover={el.imgCover}
-                    type={el.type}
                     specification={el.specification}
                     id={el.id}
                     key={el.id}

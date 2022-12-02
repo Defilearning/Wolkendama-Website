@@ -1,9 +1,10 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "../Component/Utils/Header";
 import Footer from "../Component/Utils/Footer";
 import CartData from "../store/cart-data";
 import Button from "../Component/Utils/Button";
 import { Link } from "react-router-dom";
+import CartItem from "../Component/CartDetails/CartItem";
 
 const DUMMY_DATA = [
   {
@@ -26,8 +27,7 @@ const DUMMY_DATA = [
       "https://picsum.photos/600/809",
       "https://picsum.photos/600/810",
     ],
-    type: "kendama",
-    tag: ["single", "hot"],
+    itemFilter: ["single", "hot"],
     specification: ["plain", "red", "sticky"],
     variant: {
       red: { remainingQuantity: 8, price: 50 },
@@ -45,8 +45,7 @@ const DUMMY_DATA = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
     rank: "top-1",
     imgCover: "https://picsum.photos/300/400",
-    type: "kendama",
-    tag: ["gradient", "hot"],
+    itemFilter: ["gradient", "hot"],
     specification: ["gradient", "red", "blue", "sticky"],
     variant: {
       original: 5,
@@ -59,8 +58,7 @@ const DUMMY_DATA = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
     rank: "top-3",
     imgCover: "https://picsum.photos/300/400",
-    type: "accessories",
-    tag: ["accessories"],
+    itemFilter: ["accessories"],
     specification: ["plain", "red"],
     variant: {
       original: 5,
@@ -73,8 +71,7 @@ const DUMMY_DATA = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
     rank: "top-3",
     imgCover: "https://picsum.photos/300/400",
-    type: "accessories",
-    tag: ["accessories"],
+    itemFilter: ["accessories"],
     specification: ["plain", "red"],
     variant: {
       original: 5,
@@ -87,8 +84,7 @@ const DUMMY_DATA = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
     rank: "top-3",
     imgCover: "https://picsum.photos/300/400",
-    type: "kendama",
-    tag: ["single"],
+    itemFilter: ["single"],
     specification: ["plain", "red"],
     variant: {
       original: 5,
@@ -101,8 +97,7 @@ const DUMMY_DATA = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
     rank: "top-3",
     imgCover: "https://picsum.photos/300/400",
-    type: "kendama",
-    tag: ["gradient"],
+    itemFilter: ["gradient"],
     specification: ["gradient", "red", "green"],
     variant: {
       original: 5,
@@ -115,8 +110,7 @@ const DUMMY_DATA = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
     rank: "top-3",
     imgCover: "https://picsum.photos/300/400",
-    type: "kendama",
-    tag: ["single"],
+    itemFilter: ["single"],
     specification: ["plain", "red"],
     variant: {
       original: 5,
@@ -129,8 +123,7 @@ const DUMMY_DATA = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
     rank: "top-3",
     imgCover: "https://picsum.photos/300/400",
-    type: "kendama",
-    tag: ["single"],
+    itemFilter: ["single"],
     specification: ["plain", "red"],
     variant: {
       original: 5,
@@ -140,29 +133,67 @@ const DUMMY_DATA = [
 
 const Cart = () => {
   const ctx = useContext(CartData);
+  const [finalPrice, setFinalPrice] = useState(0);
+  const [checkoutProducts, setCheckoutProducts] = useState([]);
+
+  const checkOutController = () => {
+    //TOCHANGE:
+    console.log(checkoutProducts);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    let tempPrice = 0;
+
+    let tempCheckoutArr = [];
+
+    for (const product of ctx.products) {
+      if (product.checkout) {
+        const foundItem = DUMMY_DATA.find((el) => el.id === product.id);
+
+        tempPrice =
+          tempPrice +
+          product.quantity * foundItem.variant[product.variant].price;
+        setFinalPrice(tempPrice);
+
+        tempCheckoutArr.push({
+          shopId: product.id,
+          variant: product.variant,
+          quantity: product.quantity,
+        });
+
+        setCheckoutProducts(tempCheckoutArr);
+      } else {
+        continue;
+      }
+    }
+
+    if (ctx.products.every((el) => el.checkout === false)) {
+      setFinalPrice(0);
+    }
+  }, [ctx]);
+
   return (
     <>
       <div className="bg-pic"></div>
-      <div className="flex flex-col justify-center items-center bg-purple-theme h-full w-full">
+      <div className="flex flex-col justify-between items-center bg-purple-theme h-screen w-full">
         <div className="fixed text-black flex justify-center w-full h-fit bg-slate-50 shadow-md top-0 left-0 z-30">
           <div className="w-10/12">
             <Header />
           </div>
         </div>
-        <div className="w-3/5 min-w-[350px] mt-32 my-24 bg-[#cbc8df] text-black z-20 py-10 px-10 rounded-lg flex gap-5">
+        <div className="w-4/6 min-w-[800px] mt-32 my-24 bg-[#cbc8df] text-black z-20 py-10 px-10 rounded-lg flex gap-5">
           <div className="w-full">
             <strong>Your Cart Items</strong>
             <div className="flex flex-col gap-10 ">
               {ctx.products.length !== 0 && (
                 <div className="flex justify-center items-center">
-                  <p className="w-[5%] text-center">No.</p>
-                  <p className="w-[45%] ">Products</p>
-                  <p className="w-[20%] text-center">Variation</p>
+                  <p className="w-[5%] text-center"></p>
+                  <p className="w-[55%] ">Products</p>
+                  <p className="w-[10%] text-center">Variation</p>
                   <p className="w-[10%] text-center">Unit Price</p>
                   <p className="w-[10%] text-center">Quantity</p>
                   <p className="w-[10%] text-center">Total Price</p>
@@ -176,44 +207,7 @@ const Cart = () => {
                   );
 
                   return (
-                    <>
-                      <div className="flex justify-center items-center">
-                        <p className="w-[5%] text-center">{`${i + 1}.`}</p>
-                        <div
-                          className="w-[5%] min-h-12 bg-center"
-                          style={{
-                            backgroundImage: `url(${foundItem.imgCover})`,
-                            backgroundSize: "contain",
-                            backgroundRepeat: "no-repeat",
-                          }}
-                        ></div>
-                        <p className="w-[10%] text-center">{foundItem.title}</p>
-                        <p className="w-[30%] text-center">
-                          {foundItem.descriptions}
-                        </p>
-                        <p className="w-[20%] text-center">{el.variant}</p>
-                        <p className="w-[10%] text-center">
-                          RM{foundItem.variant[el.variant].price}
-                        </p>
-                        <div className="w-[10%] flex justify-between items-center">
-                          <Button variant="secondary" textSize="md">
-                            -
-                          </Button>
-                          {el.quantity}
-                          <Button variant="secondary" textSize="md">
-                            +
-                          </Button>
-                        </div>
-                        <p className="w-[10%] text-center">
-                          RM{el.quantity * foundItem.variant[el.variant].price}
-                        </p>
-                        <div className="w-[10%] flex justify-center">
-                          <Button variant="white" textSize="base">
-                            Delete
-                          </Button>
-                        </div>
-                      </div>
-                    </>
+                    <CartItem i={i} foundItem={foundItem} el={el} key={i} />
                   );
                 })
               ) : (
@@ -226,9 +220,13 @@ const Cart = () => {
                 </>
               )}
               {ctx.products.length !== 0 ? (
-                <Button variant="gradient" className="w-fit self-end">
-                  Checkout
-                </Button>
+                <div className="w-fit self-end flex items-center">
+                  <h1 className="mr-10 text-xl font-bold">{`Total Price: RM ${finalPrice}`}</h1>
+
+                  <Button variant="gradient" onClick={checkOutController}>
+                    Checkout
+                  </Button>
+                </div>
               ) : (
                 <Link to="/shop">
                   <Button variant="gradient">Shop</Button>

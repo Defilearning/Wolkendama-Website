@@ -132,6 +132,7 @@ function DescButtons({
               quantity,
               variant: itemVariant.type,
               remainingQuantity: itemVariant.remainingQuantity,
+              checkout: false,
             })}
           >
             Add to Cart
