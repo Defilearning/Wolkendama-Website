@@ -137,7 +137,7 @@ function App() {
     }
 
     // If found item quantity === remaining quantity
-    if (cartItems[foundItemIndex].quantity === remainingQuantity) {
+    if (cartItems[foundItemIndex].quantity >= remainingQuantity) {
       return;
     }
 
@@ -164,7 +164,7 @@ function App() {
     }
 
     // If found item quantity === 1
-    if (cartItems[foundItemIndex].quantity === 1) {
+    if (cartItems[foundItemIndex].quantity <= 1) {
       return;
     }
 

@@ -1,9 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CartData from "../../store/cart-data";
+import Alert from "../Utils/Alert";
 import Button from "../Utils/Button";
 
 function CartItem({ i, foundItem, el }) {
   const ctx = useContext(CartData);
+  const [soldOut, setSoldOut] = useState(false);
+
+  useEffect(() => {
+    if (
+      el.quantity > foundItem.variant[el.variant].remainingQuantity &&
+      el.checkout
+    ) {
+      ctx.toggleCheckout({ id: el.id, variant: el.variant });
+      setSoldOut(true);
+    } else if (el.quantity > foundItem.variant[el.variant].remainingQuantity) {
+      setSoldOut(true);
+    } else {
+      setSoldOut(false);
+    }
+  }, [ctx, el.checkout, el.id, el.variant, el.quantity, foundItem.variant]);
 
   return (
     <>
@@ -11,9 +27,10 @@ function CartItem({ i, foundItem, el }) {
         <div className="w-[5%] flex items-center justify-center">
           <input
             type="checkbox"
-            checked={el.checkout ? "checked" : false}
+            disabled={soldOut}
+            checked={el.checkout && !soldOut ? "checked" : false}
             className="checkbox checkbox-md checkbox-primary"
-            onClick={ctx.toggleCheckout.bind(null, {
+            onChange={ctx.toggleCheckout.bind(null, {
               id: el.id,
               variant: el.variant,
             })}
@@ -28,7 +45,15 @@ function CartItem({ i, foundItem, el }) {
           }}
         ></div>
         <p className="w-[15%] text-center">{foundItem.title}</p>
-        <p className="w-[35%] text-center">{foundItem.descriptions}</p>
+        <div className="w-[35%] flex flex-col">
+          <p>{foundItem.descriptions}</p>
+          {soldOut && (
+            <Alert variant="error">
+              The current stock remaining quantity is{" "}
+              {foundItem.variant[el.variant].remainingQuantity}.
+            </Alert>
+          )}
+        </div>
         <p className="w-[10%] text-center">{el.variant}</p>
         <p className="w-[10%] text-center">
           RM{foundItem.variant[el.variant].price}

@@ -14,7 +14,7 @@ const DUMMY_DATA = {
   img: [
     "https://picsum.photos/600/800",
     "https://picsum.photos/600/801",
-    "https://picsum.photos/600/800",
+    "https://picsum.photos/600/802",
     "https://picsum.photos/600/803",
     "https://picsum.photos/600/804",
     "https://picsum.photos/600/805",
@@ -24,8 +24,7 @@ const DUMMY_DATA = {
     "https://picsum.photos/600/809",
     "https://picsum.photos/600/810",
   ],
-  type: "kendama",
-  tag: ["single", "hot"],
+  itemFilter: ["single", "hot"],
   specification: ["plain", "red", "sticky"],
   variant: {
     red: { remainingQuantity: 8, price: 50 },

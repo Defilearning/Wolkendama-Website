@@ -122,7 +122,7 @@ function DescButtons({
           </>
         )}
         {Object.keys(variant).length === 1 &&
-        Object.values(variant)[0] === 0 ? (
+        Object.values(variant)[0].remainingQuantity === 0 ? (
           <Button variant="disabled">Sold Out</Button>
         ) : (
           <Button

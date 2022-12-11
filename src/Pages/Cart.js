@@ -30,7 +30,7 @@ const DUMMY_DATA = [
     itemFilter: ["single", "hot"],
     specification: ["plain", "red", "sticky"],
     variant: {
-      red: { remainingQuantity: 8, price: 50 },
+      red: { remainingQuantity: 4, price: 50 },
       purple: { remainingQuantity: 0, price: 50 },
       blue: { remainingQuantity: 2, price: 50 },
       green: { remainingQuantity: 3, price: 50 },
@@ -147,7 +147,6 @@ const Cart = () => {
 
   useEffect(() => {
     let tempPrice = 0;
-
     let tempCheckoutArr = [];
 
     for (const product of ctx.products) {
