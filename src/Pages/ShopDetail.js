@@ -3,38 +3,7 @@ import Header from "../Component/Utils/Header";
 import DescButtons from "../Component/ShopDetailPage/DescButtons";
 import PhotoGallery from "../Component/ShopDetailPage/PhotoGallery";
 import Footer from "../Component/Utils/Footer";
-
-const DUMMY_DATA = {
-  id: 1,
-  title: "Test1",
-  descriptions:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-  rank: "top-2",
-  imgCover: "https://picsum.photos/300/400",
-  img: [
-    "https://picsum.photos/600/800",
-    "https://picsum.photos/600/801",
-    "https://picsum.photos/600/802",
-    "https://picsum.photos/600/803",
-    "https://picsum.photos/600/804",
-    "https://picsum.photos/600/805",
-    "https://picsum.photos/600/806",
-    "https://picsum.photos/600/807",
-    "https://picsum.photos/600/808",
-    "https://picsum.photos/600/809",
-    "https://picsum.photos/600/810",
-  ],
-  itemFilter: ["single", "hot"],
-  specification: ["plain", "red", "sticky"],
-  variant: {
-    red: { remainingQuantity: 8, price: 50 },
-    purple: { remainingQuantity: 0, price: 50 },
-    blue: { remainingQuantity: 2, price: 50 },
-    green: { remainingQuantity: 3, price: 50 },
-    orange: { remainingQuantity: 0, price: 50 },
-    pink: { remainingQuantity: 5, price: 75 },
-  },
-};
+import { useParams } from "react-router-dom";
 
 const ShopDetail = () => {
   const [itemVariant, setItemVariant] = useState({
@@ -42,10 +11,24 @@ const ShopDetail = () => {
     remainingQuantity: null,
   });
   const [quantity, setQuantity] = useState(1);
+  const [shopItem, setShopItem] = useState();
+  const id = useParams().shopId;
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+
+    const fetchData = async () => {
+      const data = await fetch(`http://127.0.0.1:3000/api/v1/shop/${id}`, {
+        mode: "cors",
+      });
+
+      const response = await data.json();
+
+      setShopItem(response.data);
+    };
+
+    fetchData();
+  }, [id]);
 
   const addQuantity = () => {
     if (quantity === itemVariant.remainingQuantity) {
@@ -72,23 +55,26 @@ const ShopDetail = () => {
             <Header />
           </div>
         </div>
-        <div className="w-3/5 min-w-[350px] mt-32 my-24 bg-[#cbc8df] text-black z-20 py-10 px-10 rounded-lg flex gap-5">
-          <PhotoGallery
-            img={DUMMY_DATA.img}
-            descriptions={DUMMY_DATA.descriptions}
-          />
-          <DescButtons
-            descriptions={DUMMY_DATA.descriptions}
-            itemVariant={itemVariant}
-            setItemVariant={setItemVariant}
-            quantity={quantity}
-            variant={DUMMY_DATA.variant}
-            setQuantity={setQuantity}
-            minusQuantity={minusQuantity}
-            addQuantity={addQuantity}
-            id={DUMMY_DATA.id}
-          />
-        </div>
+        {shopItem && (
+          <div className="w-3/5 min-w-[350px] mt-32 my-24 bg-[#cbc8df] text-black z-20 py-10 px-10 rounded-lg flex gap-5">
+            <PhotoGallery
+              img={shopItem.img}
+              descriptions={shopItem.descriptions}
+            />
+            <DescButtons
+              title={shopItem.title}
+              descriptions={shopItem.descriptions}
+              itemVariant={itemVariant}
+              setItemVariant={setItemVariant}
+              quantity={quantity}
+              variant={shopItem.variant}
+              setQuantity={setQuantity}
+              minusQuantity={minusQuantity}
+              addQuantity={addQuantity}
+              id={id}
+            />
+          </div>
+        )}
         <div className="bg-slate-100 full-bleed-white z-20">
           <Footer />
         </div>

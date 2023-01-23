@@ -13,6 +13,7 @@ function DescButtons({
   addQuantity,
   itemVariant,
   id,
+  title,
 }) {
   const ctx = useContext(CartData);
   const [hasClicked, setHasClicked] = useState(false);
@@ -26,6 +27,9 @@ function DescButtons({
 
   return (
     <div className="flex flex-col gap-5">
+      <h1>
+        <strong className="text-3xl">{title}</strong>
+      </h1>
       <h1>
         <strong>Descriptions</strong>
       </h1>

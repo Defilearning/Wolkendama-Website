@@ -6,143 +6,40 @@ import Button from "../Component/Utils/Button";
 import { Link } from "react-router-dom";
 import CartItem from "../Component/CartDetails/CartItem";
 
-const DUMMY_DATA = [
-  {
-    id: 1,
-    title: "Test1",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-2",
-    imgCover: "https://picsum.photos/300/400",
-    img: [
-      "https://picsum.photos/600/800",
-      "https://picsum.photos/600/801",
-      "https://picsum.photos/600/800",
-      "https://picsum.photos/600/803",
-      "https://picsum.photos/600/804",
-      "https://picsum.photos/600/805",
-      "https://picsum.photos/600/806",
-      "https://picsum.photos/600/807",
-      "https://picsum.photos/600/808",
-      "https://picsum.photos/600/809",
-      "https://picsum.photos/600/810",
-    ],
-    itemFilter: ["single", "hot"],
-    specification: ["plain", "red", "sticky"],
-    variant: {
-      red: { remainingQuantity: 4, price: 50 },
-      purple: { remainingQuantity: 0, price: 50 },
-      blue: { remainingQuantity: 2, price: 50 },
-      green: { remainingQuantity: 3, price: 50 },
-      orange: { remainingQuantity: 0, price: 50 },
-      pink: { remainingQuantity: 5, price: 75 },
-    },
-  },
-  {
-    id: 2,
-    title: "Test2",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-1",
-    imgCover: "https://picsum.photos/300/400",
-    itemFilter: ["gradient", "hot"],
-    specification: ["gradient", "red", "blue", "sticky"],
-    variant: {
-      original: 5,
-    },
-  },
-  {
-    id: 3,
-    title: "Test3",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-3",
-    imgCover: "https://picsum.photos/300/400",
-    itemFilter: ["accessories"],
-    specification: ["plain", "red"],
-    variant: {
-      original: 5,
-    },
-  },
-  {
-    id: 4,
-    title: "Test4",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-3",
-    imgCover: "https://picsum.photos/300/400",
-    itemFilter: ["accessories"],
-    specification: ["plain", "red"],
-    variant: {
-      original: 5,
-    },
-  },
-  {
-    id: 5,
-    title: "Test5",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-3",
-    imgCover: "https://picsum.photos/300/400",
-    itemFilter: ["single"],
-    specification: ["plain", "red"],
-    variant: {
-      original: 5,
-    },
-  },
-  {
-    id: 6,
-    title: "Test6",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-3",
-    imgCover: "https://picsum.photos/300/400",
-    itemFilter: ["gradient"],
-    specification: ["gradient", "red", "green"],
-    variant: {
-      original: 5,
-    },
-  },
-  {
-    id: 7,
-    title: "Test7",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-3",
-    imgCover: "https://picsum.photos/300/400",
-    itemFilter: ["single"],
-    specification: ["plain", "red"],
-    variant: {
-      original: 5,
-    },
-  },
-  {
-    id: 8,
-    title: "Test8",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-3",
-    imgCover: "https://picsum.photos/300/400",
-    itemFilter: ["single"],
-    specification: ["plain", "red"],
-    variant: {
-      original: 5,
-    },
-  },
-];
-
 const Cart = () => {
   const ctx = useContext(CartData);
+  const [initialShopItem, setInitialShopItem] = useState();
   const [finalPrice, setFinalPrice] = useState(0);
   const [checkoutProducts, setCheckoutProducts] = useState([]);
 
-  const checkOutController = () => {
-    //TOCHANGE:
-    console.log(checkoutProducts);
+  const checkOutController = async () => {
+    const data = await fetch("http://127.0.0.1:3000/api/v1/checkout", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: "cors",
+      method: "POST",
+      body: JSON.stringify({ items: checkoutProducts }),
+    });
+
+    const response = await data.json();
+    window.location.replace(response.data.url);
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    const fetchData = async () => {
+      const data = await fetch("http://127.0.0.1:3000/api/v1/shop", {
+        mode: "cors",
+      });
+
+      const response = await data.json();
+
+      setInitialShopItem(response.data);
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -150,8 +47,8 @@ const Cart = () => {
     let tempCheckoutArr = [];
 
     for (const product of ctx.products) {
-      if (product.checkout) {
-        const foundItem = DUMMY_DATA.find((el) => el.id === product.id);
+      if (product.checkout && initialShopItem) {
+        const foundItem = initialShopItem.find((el) => el._id === product.id);
 
         tempPrice =
           tempPrice +
@@ -173,7 +70,7 @@ const Cart = () => {
     if (ctx.products.every((el) => el.checkout === false)) {
       setFinalPrice(0);
     }
-  }, [ctx]);
+  }, [ctx, initialShopItem]);
 
   return (
     <>
@@ -199,10 +96,10 @@ const Cart = () => {
                   <div className="w-[10%] text-center">Actions</div>
                 </div>
               )}
-              {ctx.products.length !== 0 ? (
+              {ctx.products.length !== 0 && initialShopItem ? (
                 ctx.products.map((el, i) => {
-                  const foundItem = DUMMY_DATA.find(
-                    (data) => data.id === el.id
+                  const foundItem = initialShopItem.find(
+                    (data) => data._id === el.id
                   );
 
                   return (

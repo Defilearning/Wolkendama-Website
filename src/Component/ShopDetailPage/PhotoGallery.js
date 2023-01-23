@@ -23,7 +23,6 @@ function PhotoGallery({ img, descriptions }) {
     }
 
     setGallery((prev) => {
-      console.log(prev.image - 1);
       if ((prev.image - 1) % 5 === 4) {
         return { page: prev.page - 1, image: prev.image - 1 };
       } else {

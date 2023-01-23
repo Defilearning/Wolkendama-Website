@@ -1,43 +1,38 @@
 import { Link } from "react-router-dom";
 import TopCards from "../../Utils/TopCards";
 import Button from "../../Utils/Button";
-
-const DUMMY_DATA = [
-  {
-    title: "Test1",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-2",
-    imgCover: "https://picsum.photos/300/400",
-    type: "kendama",
-    specification: ["plain", "red", "sticky"],
-  },
-  {
-    title: "Test2",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-1",
-    imgCover: "https://picsum.photos/300/400",
-    type: "kendama",
-    specification: ["gradient", "red", "blue", "sticky"],
-  },
-  {
-    title: "Test3",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-3",
-    imgCover: "https://picsum.photos/300/400",
-    type: "accessories",
-    specification: ["plain", "red"],
-  },
-];
+import { useEffect, useState } from "react";
 
 const Catalogue = () => {
+  const [catalogue, setCatalogue] = useState([]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    const fetchData = async () => {
+      const data = await fetch("http://127.0.0.1:3000/api/v1/shop/top-3", {
+        mode: "cors",
+      });
+
+      const response = (await data.json()).data;
+
+      console.log(response);
+
+      const temp = response[0];
+      response[0] = response[1];
+      response[1] = temp;
+
+      setCatalogue(response);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-6xl text-black pb-20 font-bold">Our Best Seller</h1>
       <div className="flex gap-10">
-        {DUMMY_DATA.map((el) => (
+        {catalogue.map((el) => (
           <TopCards
             title={el.title}
             rank={el.rank}

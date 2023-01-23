@@ -51,11 +51,11 @@ const Home = () => {
             </div>
           </div>
         )}
-        <div className="bg-light-gray full-bleed-violet py-32">
+        <div className="bg-light-gray full-bleed-violet py-24">
           <Catalogue />
         </div>
 
-        <HomeBlog />
+        {/* <HomeBlog /> */}
         <div className="bg-slate-100 full-bleed-white">
           <Footer />
         </div>

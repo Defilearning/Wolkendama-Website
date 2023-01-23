@@ -5,7 +5,7 @@ const TopCards = ({ title, rank, descriptions, imgCover }) => {
     <div className="card w-96 bg-violet-200 shadow-xl text-black">
       <figure
         className={`px-10 pt-10 ${
-          rank === "top-1"
+          rank === 1
             ? "bg-gradient-to-t from-gradient-pink to-gradient-orange"
             : "bg-rose-200"
         } `}
@@ -21,7 +21,7 @@ const TopCards = ({ title, rank, descriptions, imgCover }) => {
         <h2 className="card-title text-3xl">{title}</h2>
         <p className="text-lg pb-10">{descriptions}</p>
         <div className="card-actions">
-          {rank === "top-1" ? (
+          {rank === 1 ? (
             <Button variant="gradient" className="text-lg">
               Buy Now
             </Button>

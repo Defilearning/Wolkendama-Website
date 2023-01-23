@@ -3,89 +3,6 @@ import Header from "../Component/Utils/Header";
 import Footer from "../Component/Utils/Footer";
 import { Fragment, useEffect, useState } from "react";
 
-const DUMMY_DATA = [
-  {
-    id: 1,
-    title: "Test1",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-2",
-    imgCover: "https://picsum.photos/300/400",
-    itemFilter: ["single", "hot"],
-    specification: ["plain", "red", "sticky"],
-  },
-  {
-    id: 2,
-    title: "Test2",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-1",
-    imgCover: "https://picsum.photos/300/400",
-    itemFilter: ["gradient", "hot"],
-    specification: ["gradient", "red", "blue", "sticky"],
-  },
-  {
-    id: 3,
-    title: "Test3",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-3",
-    imgCover: "https://picsum.photos/300/400",
-    itemFilter: ["accessories"],
-    specification: ["plain", "red"],
-  },
-  {
-    id: 4,
-    title: "Test4",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-3",
-    imgCover: "https://picsum.photos/300/400",
-    itemFilter: ["accessories"],
-    specification: ["plain", "red"],
-  },
-  {
-    id: 5,
-    title: "Test5",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-3",
-    imgCover: "https://picsum.photos/300/400",
-    itemFilter: ["single"],
-    specification: ["plain", "red"],
-  },
-  {
-    id: 6,
-    title: "Test6",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-3",
-    imgCover: "https://picsum.photos/300/400",
-    itemFilter: ["gradient"],
-    specification: ["gradient", "red", "green"],
-  },
-  {
-    id: 7,
-    title: "Test7",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-3",
-    imgCover: "https://picsum.photos/300/400",
-    itemFilter: ["single"],
-    specification: ["plain", "red"],
-  },
-  {
-    id: 8,
-    title: "Test8",
-    descriptions:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at ultricies justo.",
-    rank: "top-3",
-    imgCover: "https://picsum.photos/300/400",
-    itemFilter: ["single"],
-    specification: ["plain", "red"],
-  },
-];
-
 const options = [
   {
     value: "",
@@ -116,25 +33,38 @@ const options = [
 const Shop = () => {
   const [filter, setFilter] = useState(options[0].value);
   const [data, setData] = useState([]);
+  const [shopItem, setShopItem] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    const fetchData = async () => {
+      const data = await fetch("http://127.0.0.1:3000/api/v1/shop", {
+        mode: "cors",
+      });
+
+      const response = await data.json();
+
+      setShopItem(response.data);
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
     if (filter) {
       let tempArr = [];
 
-      for (let i = 0; i < DUMMY_DATA.length; i++) {
-        for (let j = 0; j < DUMMY_DATA[i].itemFilter.length; j++) {
-          if (DUMMY_DATA[i].itemFilter[j] === filter) {
-            tempArr.push(DUMMY_DATA[i]);
+      for (let i = 0; i < shopItem.length; i++) {
+        for (let j = 0; j < shopItem[i].itemFilter.length; j++) {
+          if (shopItem[i].itemFilter[j] === filter) {
+            tempArr.push(shopItem[i]);
           }
         }
       }
       setData(tempArr);
     }
-  }, [filter]);
+  }, [filter, shopItem]);
 
   const filterChange = (e) => {
     setFilter(e.target.value);
@@ -174,14 +104,14 @@ const Shop = () => {
                     rank={el.rank}
                     imgCover={el.imgCover}
                     specification={el.specification}
-                    id={el.id}
-                    key={el.id}
+                    id={el._id}
+                    key={el._id}
                   />
                 );
               })}
 
             {(!filter || !(filter !== "all")) &&
-              DUMMY_DATA.map((el) => {
+              shopItem.map((el) => {
                 return (
                   <ShopItemCard
                     className="place-content-center"
@@ -190,8 +120,8 @@ const Shop = () => {
                     rank={el.rank}
                     imgCover={el.imgCover}
                     specification={el.specification}
-                    id={el.id}
-                    key={el.id}
+                    id={el._id}
+                    key={el._id}
                   />
                 );
               })}
