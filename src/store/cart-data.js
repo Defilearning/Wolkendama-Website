@@ -7,6 +7,7 @@ const CartData = React.createContext({
   minusCartQuantity: () => {},
   deleteCartItem: () => {},
   toggleCheckout: () => {},
+  setCartItems: () => {},
 });
 
 export default CartData;

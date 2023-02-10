@@ -2,43 +2,28 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Home from "./Pages/Home";
 import Shop from "./Pages/Shop";
-import Blog from "./Pages/Blog";
-import Tutorial from "./Pages/Tutorial";
 import AboutUs from "./Pages/AboutUs";
 import CartData from "./store/cart-data";
 import ShopDetail from "./Pages/ShopDetail";
 import { useEffect, useState } from "react";
 import Cart from "./Pages/Cart";
-import Admin from "./Pages/Admin";
-import ShopOverview from "./Admin/Application/Shop/ShopOverview";
-import CreateShop from "./Admin/Application/Shop/CreateShop";
-import ChangeShop from "./Admin/Application/Shop/ChangeShop";
-import UpdateInventory from "./Admin/Application/Shop/UpdateInventory";
-import UploadPhoto from "./Admin/Application/Shop/UploadPhoto";
-import DeletePhoto from "./Admin/Application/Shop/DeletePhoto";
-import CustomerOverview from "./Admin/Application/Customer/CustomerOverview";
-import ChangeCustomer from "./Admin/Application/Customer/ChangeCustomer";
+import ErrorPage from "./Component/Utils/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/shop",
     element: <Shop />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/shop/:shopId",
     element: <ShopDetail />,
-  },
-  {
-    path: "/blog",
-    element: <Blog />,
-  },
-  {
-    path: "/tutorial",
-    element: <Tutorial />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/about-us",
@@ -47,44 +32,6 @@ const router = createBrowserRouter([
   {
     path: "/cart",
     element: <Cart />,
-  },
-  {
-    path: "/woladmin",
-    element: <Admin />,
-    children: [
-      {
-        path: "/woladmin/shop",
-        element: <ShopOverview />,
-      },
-      {
-        path: "/woladmin/create-shop-item",
-        element: <CreateShop />,
-      },
-      {
-        path: "/woladmin/change-shop-item/:shopId",
-        element: <ChangeShop />,
-      },
-      {
-        path: "/woladmin/update-inventory/:shopId",
-        element: <UpdateInventory />,
-      },
-      {
-        path: "/woladmin/upload-photo/:shopId",
-        element: <UploadPhoto />,
-      },
-      {
-        path: "/woladmin/delete-photo/:shopId",
-        element: <DeletePhoto />,
-      },
-      {
-        path: "/woladmin/customer",
-        element: <CustomerOverview />,
-      },
-      {
-        path: "/woladmin/change-customer/:customerId",
-        element: <ChangeCustomer />,
-      },
-    ],
   },
 ]);
 
@@ -275,6 +222,7 @@ function App() {
         minusCartQuantity,
         deleteCartItem,
         toggleCheckout,
+        setCartItems: (arr) => setCartItems(arr),
       }}
     >
       <RouterProvider router={router} />

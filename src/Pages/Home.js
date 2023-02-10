@@ -1,7 +1,6 @@
 import Header from "../Component/Utils/Header";
 import Hero from "../Component/HomePage/Hero/Hero";
 import Catalogue from "../Component/HomePage/Catalogue/Catalogue";
-import HomeBlog from "../Component/HomePage/HomeBlog/HomeBlog";
 import Footer from "../Component/Utils/Footer";
 import { useEffect, useRef, useState } from "react";
 
@@ -55,7 +54,6 @@ const Home = () => {
           <Catalogue />
         </div>
 
-        {/* <HomeBlog /> */}
         <div className="bg-slate-100 full-bleed-white">
           <Footer />
         </div>

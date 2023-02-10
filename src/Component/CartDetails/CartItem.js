@@ -9,17 +9,17 @@ function CartItem({ i, foundItem, el }) {
 
   useEffect(() => {
     if (
-      el.quantity > foundItem.variant[el.variant].remainingQuantity &&
+      el.quantity > foundItem?.variant[el.variant].remainingQuantity &&
       el.checkout
     ) {
       ctx.toggleCheckout({ id: el.id, variant: el.variant });
       setSoldOut(true);
-    } else if (el.quantity > foundItem.variant[el.variant].remainingQuantity) {
+    } else if (el.quantity > foundItem?.variant[el.variant].remainingQuantity) {
       setSoldOut(true);
     } else {
       setSoldOut(false);
     }
-  }, [ctx, el.checkout, el.id, el.variant, el.quantity, foundItem.variant]);
+  }, [ctx, el.checkout, el.id, el.variant, el.quantity, foundItem?.variant]);
 
   return (
     <>
@@ -39,24 +39,24 @@ function CartItem({ i, foundItem, el }) {
         <div
           className="w-[5%] min-h-12 bg-center"
           style={{
-            backgroundImage: `url(${foundItem.imgCover})`,
+            backgroundImage: `url(${foundItem?.imgCover})`,
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
           }}
         ></div>
-        <p className="w-[15%] text-center">{foundItem.title}</p>
+        <p className="w-[15%] text-center">{foundItem?.title}</p>
         <div className="w-[35%] flex flex-col">
-          <p>{foundItem.descriptions}</p>
+          <p>{foundItem?.descriptions}</p>
           {soldOut && (
             <Alert variant="error">
               The current stock remaining quantity is{" "}
-              {foundItem.variant[el.variant].remainingQuantity}.
+              {foundItem?.variant[el.variant].remainingQuantity}.
             </Alert>
           )}
         </div>
         <p className="w-[10%] text-center">{el.variant}</p>
         <p className="w-[10%] text-center">
-          RM{foundItem.variant[el.variant].price}
+          RM{foundItem?.variant[el.variant].price}
         </p>
         <div className="w-[10%] flex justify-between items-center">
           <Button
@@ -79,14 +79,14 @@ function CartItem({ i, foundItem, el }) {
                 id: el.id,
                 variant: el.variant,
               },
-              foundItem.variant[el.variant].remainingQuantity
+              foundItem?.variant[el.variant].remainingQuantity
             )}
           >
             +
           </Button>
         </div>
         <p className="w-[10%] text-center">
-          RM{el.quantity * foundItem.variant[el.variant].price}
+          RM{el.quantity * foundItem?.variant[el.variant].price}
         </p>
         <div className="w-[10%] flex justify-center">
           <Button

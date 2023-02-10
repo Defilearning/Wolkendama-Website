@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import Button from "./Button";
 
-const TopCards = ({ title, rank, descriptions, imgCover }) => {
+const TopCards = ({ id, title, rank, descriptions, imgCover }) => {
   return (
     <div className="card w-96 bg-violet-200 shadow-xl text-black">
       <figure
@@ -13,7 +14,7 @@ const TopCards = ({ title, rank, descriptions, imgCover }) => {
         <img src={imgCover} alt="Kendama" className="rounded-t-xl shadow-md" />
       </figure>
       <div className="card-body items-center text-center">
-        {rank === "top-1" && (
+        {rank === 1 && (
           <div className="badge badge-secondary badge-outline py-3">
             Best Seller
           </div>
@@ -22,13 +23,17 @@ const TopCards = ({ title, rank, descriptions, imgCover }) => {
         <p className="text-lg pb-10">{descriptions}</p>
         <div className="card-actions">
           {rank === 1 ? (
-            <Button variant="gradient" className="text-lg">
-              Buy Now
-            </Button>
+            <Link to={`shop/${id}`}>
+              <Button variant="gradient" className="text-lg">
+                Buy Now
+              </Button>
+            </Link>
           ) : (
-            <Button variant="secondary" className="text-lg">
-              Buy Now
-            </Button>
+            <Link to={`shop/${id}`}>
+              <Button variant="secondary" className="text-lg">
+                Buy Now
+              </Button>
+            </Link>
           )}
         </div>
       </div>

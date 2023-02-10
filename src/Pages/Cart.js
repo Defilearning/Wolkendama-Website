@@ -13,30 +13,55 @@ const Cart = () => {
   const [checkoutProducts, setCheckoutProducts] = useState([]);
 
   const checkOutController = async () => {
-    const data = await fetch("http://127.0.0.1:3000/api/v1/checkout", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      mode: "cors",
-      method: "POST",
-      body: JSON.stringify({ items: checkoutProducts }),
-    });
+    try {
+      const data = await fetch("http://127.0.0.1:3000/api/v1/checkout", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "cors",
+        method: "POST",
+        body: JSON.stringify({ items: checkoutProducts }),
+      });
 
-    const response = await data.json();
-    window.location.replace(response.data.url);
+      const response = await data.json();
+
+      checkoutProducts.forEach((el) =>
+        ctx.deleteCartItem({ ...el, id: el.shopId })
+      );
+      window.location.replace(response.data.url);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
 
     const fetchData = async () => {
-      const data = await fetch("http://127.0.0.1:3000/api/v1/shop", {
-        mode: "cors",
-      });
+      const data = await fetch(
+        "http://127.0.0.1:3000/api/v1/shop?productionReady=true",
+        {
+          mode: "cors",
+        }
+      );
 
-      const response = await data.json();
+      const response = (await data.json()).data;
 
-      setInitialShopItem(response.data);
+      const tempArr = [];
+
+      for (let i = 0; i < ctx.products.length; i++) {
+        for (let j = 0; j < response.length; j++) {
+          if (
+            ctx.products[i].id === response[j]._id &&
+            response[j].variant[ctx.products[i].variant]
+          )
+            tempArr.push(ctx.products[i]);
+        }
+      }
+
+      ctx.setCartItems(tempArr);
+
+      setInitialShopItem(response);
     };
 
     fetchData();
@@ -47,12 +72,12 @@ const Cart = () => {
     let tempCheckoutArr = [];
 
     for (const product of ctx.products) {
-      if (product.checkout && initialShopItem) {
+      if (product.checkout && initialShopItem?.length !== 0) {
         const foundItem = initialShopItem.find((el) => el._id === product.id);
 
         tempPrice =
           tempPrice +
-          product.quantity * foundItem.variant[product.variant].price;
+          product.quantity * foundItem?.variant[product.variant].price;
         setFinalPrice(tempPrice);
 
         tempCheckoutArr.push({
@@ -96,9 +121,9 @@ const Cart = () => {
                   <div className="w-[10%] text-center">Actions</div>
                 </div>
               )}
-              {ctx.products.length !== 0 && initialShopItem ? (
-                ctx.products.map((el, i) => {
-                  const foundItem = initialShopItem.find(
+              {ctx.products?.length !== 0 && initialShopItem ? (
+                ctx.products?.map((el, i) => {
+                  const foundItem = initialShopItem?.find(
                     (data) => data._id === el.id
                   );
 
@@ -119,9 +144,13 @@ const Cart = () => {
                 <div className="w-fit self-end flex items-center">
                   <h1 className="mr-10 text-xl font-bold">{`Total Price: RM ${finalPrice}`}</h1>
 
-                  <Button variant="gradient" onClick={checkOutController}>
-                    Checkout
-                  </Button>
+                  {ctx.products?.every((el) => el.checkout === false) ? (
+                    <Button variant="disabled">Select item for checkout</Button>
+                  ) : (
+                    <Button variant="gradient" onClick={checkOutController}>
+                      Checkout
+                    </Button>
+                  )}
                 </div>
               ) : (
                 <Link to="/shop">
