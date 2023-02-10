@@ -46,9 +46,9 @@ const Shop = () => {
       try {
         setIsLoading(true);
         const data = await fetch(
-          "http://127.0.0.1:3000/api/v1/shop?productionReady=true",
+          "https://api.wolkendama.com/api/v1/shop?productionReady=true",
           {
-            mode: "cors",
+            mode: "no-cors",
           }
         );
 

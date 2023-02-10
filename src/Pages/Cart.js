@@ -14,11 +14,11 @@ const Cart = () => {
 
   const checkOutController = async () => {
     try {
-      const data = await fetch("http://127.0.0.1:3000/api/v1/checkout", {
+      const data = await fetch("https://api.wolkendama.com/api/v1/checkout", {
         headers: {
           "Content-Type": "application/json",
         },
-        mode: "cors",
+        mode: "no-cors",
         method: "POST",
         body: JSON.stringify({ items: checkoutProducts }),
       });
@@ -39,9 +39,9 @@ const Cart = () => {
 
     const fetchData = async () => {
       const data = await fetch(
-        "http://127.0.0.1:3000/api/v1/shop?productionReady=true",
+        "https://api.wolkendama.com/api/v1/shop?productionReady=true",
         {
-          mode: "cors",
+          mode: "no-cors",
         }
       );
 
