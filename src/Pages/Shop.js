@@ -46,10 +46,7 @@ const Shop = () => {
       try {
         setIsLoading(true);
         const data = await fetch(
-          "https://api.wolkendama.com/api/v1/shop?productionReady=true",
-          {
-            mode: "no-cors",
-          }
+          "https://api.wolkendama.com/api/v1/shop?productionReady=true"
         );
 
         const response = await data.json();

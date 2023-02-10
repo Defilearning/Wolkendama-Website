@@ -17,10 +17,7 @@ const Catalogue = () => {
         setIsLoading(true);
 
         const data = await fetch(
-          "https://api.wolkendama.com/api/v1/shop/top-3",
-          {
-            mode: "no-cors",
-          }
+          "https://api.wolkendama.com/api/v1/shop/top-3"
         );
 
         const response = await data.json();

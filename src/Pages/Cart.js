@@ -18,7 +18,6 @@ const Cart = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        mode: "no-cors",
         method: "POST",
         body: JSON.stringify({ items: checkoutProducts }),
       });
@@ -39,10 +38,7 @@ const Cart = () => {
 
     const fetchData = async () => {
       const data = await fetch(
-        "https://api.wolkendama.com/api/v1/shop?productionReady=true",
-        {
-          mode: "no-cors",
-        }
+        "https://api.wolkendama.com/api/v1/shop?productionReady=true"
       );
 
       const response = (await data.json()).data;
