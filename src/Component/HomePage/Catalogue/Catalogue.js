@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import ReactLoading from "react-loading";
 
 const Catalogue = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
   const [catalogue, setCatalogue] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
@@ -17,7 +19,7 @@ const Catalogue = () => {
         setIsLoading(true);
 
         const data = await fetch(
-          "https://api.wolkendama.com/api/v1/shop/top-3"
+          `${process.env.REACT_APP_FETCH_URL}/api/v1/shop/top-3`
         );
 
         const response = await data.json();
@@ -29,12 +31,6 @@ const Catalogue = () => {
             "Shop is under maintenance currently, sorry for the inconvenience and please try again later!"
           );
         } else {
-          if (response.data.length > 2) {
-            const temp = response[0];
-            response[0] = response[1];
-            response[1] = temp;
-          }
-
           setCatalogue(response.data);
         }
       } catch (err) {
@@ -46,18 +42,57 @@ const Catalogue = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (!catalogue) return;
+
+    if (
+      catalogue?.length > 2 &&
+      windowWidth >= 1024 &&
+      catalogue[0].rank === 1
+    ) {
+      const temp = catalogue[0];
+      catalogue[0] = catalogue[1];
+      catalogue[1] = temp;
+
+      setCatalogue(catalogue);
+    }
+
+    if (
+      catalogue?.length > 2 &&
+      windowWidth < 1024 &&
+      catalogue[0].rank === 2
+    ) {
+      const temp = catalogue[0];
+      catalogue[0] = catalogue[1];
+      catalogue[1] = temp;
+
+      setCatalogue(catalogue);
+    }
+  }, [catalogue, windowWidth]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full">
       {isLoading && <ReactLoading height={"10%"} width={"10%"} />}
 
-      {error && !isLoading && <p className="text-xl text-black">{error}</p>}
+      {error && !isLoading && (
+        <p className="text-sm md:text-xl text-black">{error}</p>
+      )}
 
       {!error && !isLoading && (
         <>
-          <h1 className="text-6xl text-black pb-20 font-bold">
+          <h1 className="text-4xl md:text-6xl text-black pb-20 font-bold">
             Our Best Seller
           </h1>
-          <div className="flex gap-10">
+          <div className="flex flex-col lg:flex-row gap-10 w-full justify-between items-center">
             {catalogue?.map((el) => (
               <TopCards
                 id={el?._id}
@@ -69,11 +104,28 @@ const Catalogue = () => {
               />
             ))}
           </div>
-          <Link to="/shop">
-            <Button variant="gradient" className="mt-16 shadow-lg">
-              Check out our shop to find more!
-            </Button>
-          </Link>
+
+          {/* Mobile version */}
+          <div className="lg:hidden ">
+            <Link to="/shop">
+              <Button
+                variant="gradient"
+                textSize="base"
+                className="mt-10 shadow-lg"
+              >
+                Check out our shop to find more!
+              </Button>
+            </Link>
+          </div>
+
+          {/* Desktop Version */}
+          <div className="hidden lg:block">
+            <Link to="/shop">
+              <Button variant="gradient" className="mt-16 shadow-lg">
+                Check out our shop to find more!
+              </Button>
+            </Link>
+          </div>
         </>
       )}
     </div>

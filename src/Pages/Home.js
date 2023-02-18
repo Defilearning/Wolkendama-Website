@@ -6,9 +6,7 @@ import { useEffect, useRef, useState } from "react";
 
 const Home = () => {
   const catalogueHeight = useRef();
-  const [componentHeight, setComponentHeight] = useState(
-    catalogueHeight.current
-  );
+  const [componentHeight, setComponentHeight] = useState();
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
@@ -38,15 +36,15 @@ const Home = () => {
   return (
     <div className="flex justify-center bg-purple-theme h-full w-full">
       <div className="bg-pic"></div>
-      <div className="w-8/12 z-10">
-        <div ref={catalogueHeight}>
-          <Header className="pt-10" />
+      <div className="lg:block lg:w-10/12 xl:w-9/12 lg:z-10 lg:pt-10 z-20">
+        <div ref={catalogueHeight} className="flex flex-col items-center">
+          <Header className="bg-slate-100 text-black lg:text-inherit lg:bg-inherit lg:shadow-none w-screen lg:w-full" />
           <Hero />
         </div>
-        {offset > componentHeight - 60 && (
-          <div className="fixed text-black flex justify-center w-full h-fit bg-slate-50 shadow-md top-0 left-0 z-20 ">
+        {offset > componentHeight && (
+          <div className="fixed text-black flex justify-center w-full h-fit bg-slate-50 shadow-md top-0 left-0 z-20">
             <div className="w-10/12">
-              <Header />
+              <Header className="text-black" />
             </div>
           </div>
         )}

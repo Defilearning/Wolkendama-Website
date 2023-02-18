@@ -1,46 +1,61 @@
 import Button from "./Button";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Header = ({ className }) => {
+  const [showNavbar, setShowNavBar] = useState(false);
+
   return (
-    <div className={`navbar text-xl justify-between ${className}`}>
+    <div
+      className={`navbar h-full text-xl justify-center ${className} relative`}
+    >
+      {/* Mobile Version */}
       <div className="navbar-start w-fit">
-        <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+        <label
+          tabIndex={0}
+          className="btn btn-ghost lg:hidden"
+          onClick={() => setShowNavBar((prev) => !prev)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <li>
-              <Link to="/shop">Shop</Link>
-            </li>
-            <li>
-              <Link to="/about-us">About Us</Link>
-            </li>
-            <li>
-              <Link to="/cart">Cart</Link>
-            </li>
-          </ul>
-        </div>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h8m-8 6h16"
+            />
+          </svg>
+        </label>
+        <ul
+          tabIndex={0}
+          className={`menu menu-compact absolute text-slate-500 p-2 shadow rounded-sm bg-slate-200 w-screen left-0 top-full origin-top transition-all  ${
+            showNavbar ? " scale-100 opacity-100" : "scale-0 opacity-0"
+          }  `}
+        >
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/shop">Shop</Link>
+          </li>
+          <li>
+            <Link to="/about-us">About Us</Link>
+          </li>
+          <li>
+            <Link to="/cart">Cart</Link>
+          </li>
+        </ul>
         <Link to="/" className="btn btn-ghost normal-case text-xl">
           Wolkendama
         </Link>
       </div>
+
+      {/* Desktop Version */}
       <div className="navbar-end w-3/4 hidden lg:flex">
         <ul className="menu menu-horizontal p-0">
           <li>

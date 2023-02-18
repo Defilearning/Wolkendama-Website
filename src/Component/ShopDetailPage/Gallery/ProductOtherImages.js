@@ -1,7 +1,7 @@
 import React from "react";
 
 const containerMap = {
-  modal: "w-[600px] grid grid-cols-5 auto-rows-max gap-5",
+  modal: "w-full flex flex-wrap gap-5",
   detail: `flex gap-2 w-[500px] mb-5 transition-all`,
 };
 

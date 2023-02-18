@@ -19,7 +19,7 @@ function PhotoGallery({ img, descriptions }) {
 
   const imageLeft = () => {
     if (gallery.image === 0) {
-      return;
+      return setGallery({ page: tempArr.length, image: img.length - 1 });
     }
 
     setGallery((prev) => {
@@ -33,7 +33,7 @@ function PhotoGallery({ img, descriptions }) {
 
   const imageRight = () => {
     if (gallery.image === img.length - 1) {
-      return;
+      return setGallery({ page: 1, image: 0 });
     }
 
     setGallery((prev) => {
@@ -50,7 +50,7 @@ function PhotoGallery({ img, descriptions }) {
   };
 
   return (
-    <>
+    <div className="w-full h-full lg:w-[500px] ">
       {createPortal(
         <>
           <GalleryModal
@@ -67,7 +67,7 @@ function PhotoGallery({ img, descriptions }) {
         </>,
         document.getElementById("overlay")
       )}
-      <div className="flex flex-col items-center bg-slate-200 p-5 rounded-md max-w-[500px] overflow-hidden">
+      <div className="flex flex-col items-center bg-slate-200 p-5 rounded-md overflow-hidden w-full h-full">
         <ProductMainImage
           imageLeft={imageLeft}
           imageRight={imageRight}
@@ -76,14 +76,16 @@ function PhotoGallery({ img, descriptions }) {
           openModal={openModal}
           variant="detail"
         />
-        <ProductOtherImages
-          img={img}
-          gallery={gallery}
-          setGallery={setGallery}
-          variant="detail"
-        />
+        <div className="hidden lg:block">
+          <ProductOtherImages
+            img={img}
+            gallery={gallery}
+            setGallery={setGallery}
+            variant="detail"
+          />
+        </div>
 
-        <div className="btn-group">
+        <div className="btn-group hidden lg:block">
           {tempArr.length > 1 &&
             tempArr.map((el) => {
               return (
@@ -99,8 +101,10 @@ function PhotoGallery({ img, descriptions }) {
               );
             })}
         </div>
+
+        <div className="lg:hidden">{`${gallery.image + 1}/${img.length}`}</div>
       </div>
-    </>
+    </div>
   );
 }
 

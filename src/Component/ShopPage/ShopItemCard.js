@@ -10,7 +10,9 @@ const ShopItemCard = ({
   specification,
   className,
 }) => (
-  <div className={`card w-96 bg-violet-200 shadow-xl text-black ${className}`}>
+  <div
+    className={`card w-72 md:w-80 bg-violet-200 shadow-xl text-black ${className}`}
+  >
     <img src={imgCover} alt="Shoes" />
     <div className="card-body gap-4">
       <h2 className="card-title">
@@ -31,9 +33,6 @@ const ShopItemCard = ({
         <Button variant="gradient" textSize="base">
           <Link to={`/shop/${id}`}>Details</Link>
         </Button>
-        {/* <Button variant="gradient" textSize="base">
-          Add to cart
-        </Button> */}
       </div>
     </div>
   </div>

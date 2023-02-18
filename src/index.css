@@ -62,3 +62,7 @@
 .pic {
   border: solid #1a0f31 2px;
 }
+
+.bg-blur {
+  box-shadow: 0 -30px 15px 10px #1a0f31;
+}

@@ -26,7 +26,7 @@ function DescButtons({
   };
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 w-full max-w-5xl lg:max-w-[550px]">
       <h1>
         <strong className="text-3xl">{title}</strong>
       </h1>
@@ -76,7 +76,7 @@ function DescButtons({
       <div className="flex flex-col gap-2">
         {itemVariant.remainingQuantity && (
           <p className="text-xs">
-            Stock remaining: {itemVariant.remainingQuantity}
+            {`Stock remaining: ${itemVariant.remainingQuantity}`}
           </p>
         )}
 
@@ -86,7 +86,7 @@ function DescButtons({
             placeholder="1"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
-            className="input input-bordered bg-slate-100"
+            className="input input-bordered bg-slate-100 w-full"
           />
           <Button
             variant="white"

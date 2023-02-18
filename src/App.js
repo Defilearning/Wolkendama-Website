@@ -37,30 +37,50 @@ const router = createBrowserRouter([
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
+  const [isInitialStart, setIsInitialStart] = useState(true);
 
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("wolCart"));
 
-    if (cart) {
-      setCartItems(cart);
+    const fetchData = async (cart) => {
+      const data = await fetch(
+        `${process.env.REACT_APP_FETCH_URL}/api/v1/shop?productionReady=true`
+      );
+
+      const response = (await data.json()).data;
+
+      const tempArr = [];
+
+      for (let i = 0; i < cart.length; i++) {
+        for (let j = 0; j < response.length; j++) {
+          if (
+            cart[i].id === response[j]._id &&
+            response[j].variant[cart[i].variant]
+          )
+            tempArr.push(cart[i]);
+        }
+      }
+
+      setCartItems(tempArr);
+    };
+
+    if (cart && cart?.length !== 0) {
+      fetchData(cart);
     }
   }, []);
 
   useEffect(() => {
-    if (cartItems.length === 0) {
+    if (cartItems.length === 0 && !isInitialStart) {
       localStorage.removeItem("wolCart");
       return;
     }
 
-    const cart = JSON.parse(localStorage.getItem("wolCart"));
-
-    if (!cart) {
-      localStorage.setItem("wolCart", JSON.stringify(cartItems));
-    } else {
+    if (cartItems.length !== 0 && !isInitialStart) {
       localStorage.removeItem("wolCart");
       localStorage.setItem("wolCart", JSON.stringify(cartItems));
     }
-  }, [cartItems]);
+    setIsInitialStart(false);
+  }, [cartItems, isInitialStart]);
 
   const addToCart = (item) => {
     const foundItem = cartItems.find(

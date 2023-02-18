@@ -14,10 +14,18 @@ const textSizeMap = {
   sm: "text-sm py-1 px-2",
 };
 
-const Button = ({ children, variant, className, textSize = "lg", onClick }) => {
+const Button = ({
+  children,
+  variant,
+  className,
+  textSize = "lg",
+  onClick,
+  type,
+}) => {
   return (
     <button
       onClick={onClick}
+      type={type}
       className={`flex gap-3 font-bold rounded-md ${variantMap[variant]} ${textSizeMap[textSize]} ${className}`}
     >
       {children}
