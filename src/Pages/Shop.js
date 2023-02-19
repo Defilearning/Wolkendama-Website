@@ -15,15 +15,19 @@ const options = [
   },
   {
     value: "hot",
-    text: "Hot-seller",
+    text: "Hot",
   },
   {
-    value: "single",
-    text: "Single Colour",
+    value: "new",
+    text: "New",
   },
   {
-    value: "gradient",
-    text: "Gradient Colour",
+    value: "advanced",
+    text: "Advanced ",
+  },
+  {
+    value: "basic",
+    text: "Basic",
   },
   {
     value: "accessories",
@@ -153,6 +157,15 @@ const Shop = () => {
                       />
                     );
                   })}
+
+                {data &&
+                  data.length === 0 &&
+                  filter !== "all" &&
+                  filter !== "" && (
+                    <p className="text-black text-lg">
+                      There is currently no items belongs to this filter.
+                    </p>
+                  )}
               </div>
             </>
           )}

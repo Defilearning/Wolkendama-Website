@@ -15,10 +15,8 @@ const ShopItemCard = ({
   >
     <img src={imgCover} alt="Shoes" />
     <div className="card-body gap-4">
-      <h2 className="card-title">
-        {title}
-        {rank === 1 && <div className="badge badge-secondary">top-seller</div>}
-      </h2>
+      <h2 className="card-title">{title}</h2>
+      {rank === 1 && <div className="badge badge-secondary">Best-seller</div>}
       <p>{descriptions}</p>
       <div className="card-actions text-slate-500">
         {specification.map((el, i) => {

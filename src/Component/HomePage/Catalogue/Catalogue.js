@@ -92,7 +92,7 @@ const Catalogue = () => {
           <h1 className="text-4xl md:text-6xl text-black pb-20 font-bold">
             Our Best Seller
           </h1>
-          <div className="flex flex-col lg:flex-row gap-10 w-full justify-between items-center">
+          <div className="flex flex-col lg:flex-row gap-10 w-full lg:justify-center items-center ">
             {catalogue?.map((el) => (
               <TopCards
                 id={el?._id}

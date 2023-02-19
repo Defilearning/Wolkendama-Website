@@ -1,5 +1,5 @@
 import HeroContent from "./HeroContent";
-import photo from "./HeroImage.jpg";
+import photo from "../../../image/heroImage.webp";
 
 const Hero = () => {
   return (

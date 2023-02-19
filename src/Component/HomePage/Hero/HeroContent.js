@@ -5,7 +5,7 @@ const HeroContent = () => {
   return (
     <div className="max-w-4xl px-5">
       <h1 className="text-3xl lg:text-7xl sm:text-5xl text-slate-50 font-medium mb-10">
-        With <span className="text-gradient">WOLKendama</span> where Liberty
+        With <span className="text-gradient">W.O.L.Kendama</span> where Liberty
         finds its <span className="text-gradient">Value</span>
       </h1>
       <p className="text-xl lg:text-3xl sm:text-2xl text-slate-300 mb-14">
