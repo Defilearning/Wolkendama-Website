@@ -1,14 +1,17 @@
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import logoBlack from "../../image/logo-black.png";
+import logoWhite from "../../image/logo-white.png";
 
-const Header = ({ className }) => {
+const Header = ({ className, variant }) => {
   const [showNavbar, setShowNavBar] = useState(false);
 
   return (
     <div
       className={`navbar h-full text-xl justify-center ${className} relative`}
     >
+      {console.log(variant)}
       {/* Mobile Version */}
       <div className="navbar-start w-fit">
         <label
@@ -51,7 +54,16 @@ const Header = ({ className }) => {
           </li>
         </ul>
         <Link to="/" className="btn btn-ghost normal-case text-xl">
-          Wolkendama
+          <img
+            src={variant === "white" ? logoWhite : logoBlack}
+            className="h-full scale-[2.0] hidden lg:block"
+            alt="logo"
+          />
+          <img
+            src={logoBlack}
+            className="h-full scale-150 lg:hidden"
+            alt="logo"
+          />
         </Link>
       </div>
 

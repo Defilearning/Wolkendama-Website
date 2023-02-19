@@ -38,7 +38,10 @@ const Home = () => {
       <div className="bg-pic"></div>
       <div className="lg:block lg:w-10/12 xl:w-9/12 lg:z-10 lg:pt-10 z-20">
         <div ref={catalogueHeight} className="flex flex-col items-center">
-          <Header className="bg-slate-100 text-black lg:text-inherit lg:bg-inherit lg:shadow-none w-screen lg:w-full" />
+          <Header
+            className="bg-slate-100 text-black lg:text-inherit lg:bg-inherit lg:shadow-none w-screen lg:w-full"
+            variant="white"
+          />
           <Hero />
         </div>
         {offset > componentHeight && (

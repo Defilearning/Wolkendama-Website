@@ -8,8 +8,11 @@ const HeroContent = () => {
         With <span className="text-gradient">W.O.L.Kendama</span> where Liberty
         finds its <span className="text-gradient">Value</span>
       </h1>
-      <p className="text-xl lg:text-3xl sm:text-2xl text-slate-300 mb-14">
-        We provide performance, products and courses for everyone.
+      <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-slate-300 mb-14 pr-10">
+        We offer a variety of courses, workshops, and events for Kendama
+        enthusiasts of all levels. We also offer a range of Kendama products and
+        services, including accessories. Join our community of Kendama players
+        and take your skills to the next level.
       </p>
 
       {/* Mobile Version */}

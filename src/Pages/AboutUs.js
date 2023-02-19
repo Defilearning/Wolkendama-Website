@@ -79,7 +79,7 @@ const AboutUs = () => {
 
         <div className="bg-light-gray full-bleed-violet px-7 py-14 z-10 text-black lg:flex lg:flex-col lg:items-center lg:w-3/4 lg:max-w-[1300px]">
           <h1 className="text-center text-3xl font-bold">School Coaching</h1>
-          <div className="lg:flex-row lg:mb-10 lg:flex lg:gap-20 lg:items-center lg:p-10">
+          <div className="xl:flex-row xl:mb-10 xl:flex xl:gap-20 xl:items-center xl:p-10">
             <div className="lg:w-3/5">
               <p className="my-5 ">
                 We believe that by taking Kendama courses, students can improve
@@ -91,6 +91,7 @@ const AboutUs = () => {
               <p>We are currently coaching the following campus:</p>
               <div className="my-5 px-5">
                 <ul className="list-disc">
+                  <li>Tzu Chi International School Kuala Lumpur</li>
                   <li>SKJ(C) Choong Wen</li>
                   <li>SKJ(C) Kuen Cheng 1</li>
                   <li>SKJ(C) Tai Thung</li>
@@ -177,7 +178,9 @@ const AboutUs = () => {
                     d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
                   />
                 </svg>
-                <p>Email: conan@wolkendama.com</p>
+                <a href="mailto:conan@wolkendama.com">
+                  Email: conan@wolkendama.com
+                </a>
               </div>
               <div className="flex gap-3">
                 <svg
