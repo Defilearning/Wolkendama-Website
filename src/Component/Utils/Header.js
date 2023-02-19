@@ -11,12 +11,11 @@ const Header = ({ className, variant }) => {
     <div
       className={`navbar h-full text-xl justify-center ${className} relative`}
     >
-      {console.log(variant)}
       {/* Mobile Version */}
       <div className="navbar-start w-fit">
         <label
           tabIndex={0}
-          className="btn btn-ghost lg:hidden"
+          className="btn btn-ghost mr-6 lg:hidden"
           onClick={() => setShowNavBar((prev) => !prev)}
         >
           <svg
@@ -53,7 +52,10 @@ const Header = ({ className, variant }) => {
             <Link to="/cart">Cart</Link>
           </li>
         </ul>
-        <Link to="/" className="btn btn-ghost scale-[2] normal-case text-xl">
+        <Link
+          to="/"
+          className="btn btn-ghost lg:scale-[2] scale-125 normal-case text-xl animate-none"
+        >
           <img
             src={variant === "white" ? logoWhite : logoBlack}
             className="h-full hidden lg:block"
