@@ -53,17 +53,13 @@ const Header = ({ className, variant }) => {
             <Link to="/cart">Cart</Link>
           </li>
         </ul>
-        <Link to="/" className="btn btn-ghost normal-case text-xl">
+        <Link to="/" className="btn btn-ghost scale-[2] normal-case text-xl">
           <img
             src={variant === "white" ? logoWhite : logoBlack}
-            className="h-full scale-[2.0] hidden lg:block"
+            className="h-full hidden lg:block"
             alt="logo"
           />
-          <img
-            src={logoBlack}
-            className="h-full scale-150 lg:hidden"
-            alt="logo"
-          />
+          <img src={logoBlack} className="h-full lg:hidden" alt="logo" />
         </Link>
       </div>
 
