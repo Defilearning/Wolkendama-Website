@@ -62,14 +62,14 @@ const AboutUs = () => {
 
           <div className="bg-purple-theme bg-blur flex flex-col gap-5 mt-5 p-7">
             <p>
-              {`Wings Of Liberty Kendama (W.O.LKendama) Founded in Malaysia in 2019.
-              We Promote Kendama culture in Malaysia and Dream of spreading the
-              Love for Kendama across SEA.`}
+              {`Wings Of Liberty Kendama (W.O.L.Kendama) founded in Malaysia in 2019.
+              We promote Kendama culture in Malaysia and dream of spreading the
+              love for Kendama across SEA.`}
             </p>
             <p>
               Kendama has been in circulation in Malaysia for almost 20 years,
               but it has always been a niche hobby with limited promotion. With
-              the establishment of W.O.LKendama, we aim to promote Kendama in
+              the establishment of W.O.L.Kendama, we aim to promote Kendama in
               schools in the Klang Valley region and beyond. Our ultimate goal
               is to cultivate more skilled players and host training camps and
               competitions.
